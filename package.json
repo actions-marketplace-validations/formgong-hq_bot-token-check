@@ -1,6 +1,6 @@
 {
   "name": "bot-token-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fail the build if a Telegram bot token or a Discord webhook URL is in your build output.",
   "type": "module",
   "bin": { "bot-token-check": "check.mjs" },

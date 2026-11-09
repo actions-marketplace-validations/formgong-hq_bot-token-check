@@ -23,14 +23,14 @@ This check reads the build output, which is exactly what the browser will downlo
 
 ```json
 "scripts": {
-  "build": "vite build && npx -y github:formgong-hq/bot-token-check dist"
+  "build": "vite build && npx -y bot-token-check dist"
 }
 ```
 
 **Once, by hand:**
 
 ```sh
-npx -y github:formgong-hq/bot-token-check dist
+npx -y bot-token-check dist
 ```
 
 Point it at the folder you upload. For Next.js that is `.next/static`. For a plain HTML site, the site folder.
@@ -59,6 +59,8 @@ Treat the secret as public, because it already was on your last deploy. Deleting
 Then send the form through something that runs on a server: an API route, an edge function or a Worker, with the secret in that platform's environment settings and no `VITE_` or `NEXT_PUBLIC_` prefix.
 
 ## Tests
+
+Releases: pushing a `v1.2.3` tag publishes to npm from GitHub Actions through npm Trusted Publishing, so no npm token is stored anywhere.
 
 `node --test test/check.test.mjs` builds fake sites at run time and checks four cases: a token in a `const` (fails), a Discord webhook (fails), a form posting to `/api/contact` (passes), and a placeholder like `botYOUR_BOT_TOKEN` (passes). Wrong or empty folders exit with `2`. CI also runs the action itself on a leaky build and a clean one and requires the leaky one to fail.
 

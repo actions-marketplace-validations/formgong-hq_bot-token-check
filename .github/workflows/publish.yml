@@ -1,0 +1,24 @@
+# Publishes to npm when a version tag (v1.2.3) is pushed.
+# No token: npm trusts this workflow through OIDC (Trusted Publishing),
+# set up at npmjs.com/package/bot-token-check/access.
+name: publish
+on:
+  push:
+    tags: ["v*.*.*"]
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest
+      - run: node --test test/check.test.mjs
+      - name: Tag must match package.json version
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      - run: npm publish --access public
