@@ -60,7 +60,7 @@ Then send the form through something that runs on a server: an API route, an edg
 
 ## Tests
 
-`node --test test/` builds fake sites at run time and checks four cases: a token in a `const` (fails), a Discord webhook (fails), a form posting to `/api/contact` (passes), and a placeholder like `botYOUR_BOT_TOKEN` (passes). Wrong or empty folders exit with `2`. CI also runs the action itself on a leaky build and a clean one and requires the leaky one to fail.
+`node --test test/check.test.mjs` builds fake sites at run time and checks four cases: a token in a `const` (fails), a Discord webhook (fails), a form posting to `/api/contact` (passes), and a placeholder like `botYOUR_BOT_TOKEN` (passes). Wrong or empty folders exit with `2`. CI also runs the action itself on a leaky build and a clean one and requires the leaky one to fail.
 
 ## Who made this
 

@@ -5,7 +5,7 @@
   "type": "module",
   "bin": { "bot-token-check": "check.mjs" },
   "files": ["check.mjs"],
-  "scripts": { "test": "node --test test/" },
+  "scripts": { "test": "node --test test/check.test.mjs" },
   "engines": { "node": ">=18" },
   "keywords": ["telegram", "discord", "webhook", "bot-token", "secrets", "vite", "nextjs", "ci", "github-action"],
   "repository": { "type": "git", "url": "git+https://github.com/formgong-hq/bot-token-check.git" },

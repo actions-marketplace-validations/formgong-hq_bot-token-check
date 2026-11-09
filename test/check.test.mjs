@@ -1,4 +1,4 @@
-// node --test test/
+// node --test test/check.test.mjs
 // Fixtures are written at run time: the fake secrets are assembled from pieces,
 // so this repo never holds a string that secret scanners would flag.
 import { test } from "node:test";
