@@ -1,0 +1,18 @@
+name: Bot token check
+description: Fail the build if a Telegram bot token or a Discord webhook URL is in the files you are about to deploy.
+author: Formgong
+branding:
+  icon: shield
+  color: orange
+inputs:
+  path:
+    description: Build output folder to check (dist, build, out, .next/static, public).
+    required: false
+    default: dist
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        CHECK_PATH: ${{ inputs.path }}
+      run: node "$GITHUB_ACTION_PATH/check.mjs" "$CHECK_PATH"

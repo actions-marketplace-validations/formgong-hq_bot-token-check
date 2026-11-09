@@ -1,0 +1,15 @@
+{
+  "name": "bot-token-check",
+  "version": "1.0.0",
+  "description": "Fail the build if a Telegram bot token or a Discord webhook URL is in your build output.",
+  "type": "module",
+  "bin": { "bot-token-check": "check.mjs" },
+  "files": ["check.mjs"],
+  "scripts": { "test": "node --test test/" },
+  "engines": { "node": ">=18" },
+  "keywords": ["telegram", "discord", "webhook", "bot-token", "secrets", "vite", "nextjs", "ci", "github-action"],
+  "repository": { "type": "git", "url": "git+https://github.com/formgong-hq/bot-token-check.git" },
+  "homepage": "https://github.com/formgong-hq/bot-token-check#readme",
+  "author": "Formgong <hello@formgong.com>",
+  "license": "MIT"
+}

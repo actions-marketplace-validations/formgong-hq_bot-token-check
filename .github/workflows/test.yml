@@ -1,0 +1,38 @@
+name: test
+on: [push, pull_request]
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --test test/
+
+  # Runs the action the way a user would, on a leaky build and a clean one.
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make a leaky build and a clean build
+        run: |
+          mkdir -p leaky/assets clean/assets
+          T="1234567890:AA""FAKE-not-a-real-token-for-this-test"
+          printf 'const BOT_TOKEN = "%s";\n' "$T" > leaky/assets/index.js
+          echo 'fetch("/api/contact", {method: "POST"})' > clean/assets/index.js
+      - name: Clean build passes
+        uses: ./
+        with:
+          path: clean
+      - name: Leaky build fails
+        id: leaky
+        continue-on-error: true
+        uses: ./
+        with:
+          path: leaky
+      - name: The leaky step must have failed
+        run: test "${{ steps.leaky.outcome }}" = "failure"
